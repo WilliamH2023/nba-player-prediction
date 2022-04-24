@@ -38,8 +38,27 @@ export default function Home() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                malesuada lacus ex, sit amet blandit leo lobortis eget.
+              
+              <form>
+                <label>
+                  Name: 
+                  <input type="text" name="name" />
+                </label> <br/>
+                
+                <label>
+                  Age:    
+                  <input type="number" name="age" />
+                </label> <br/>
+                
+                <label>
+                  Height: 
+                  <input type="text" name="ft" /> ft.
+                  <input type="text" name="in" /> in.
+                </label>
+                
+                
+              </form>
+              
               </Typography>
             </AccordionDetails>
         </Accordion>
@@ -55,8 +74,31 @@ export default function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
+              <form>
+                <label>
+                  Games Played
+                  <input type="text" name="gamesPlayed" />
+                </label> <br/>
+                
+                <label>
+                  VORP 
+                  <input type="text" name="VORP" />
+                </label> <br/>
+                
+                <label>
+                  ATK Rating    
+                  <input type="text" name="ATKRating" />
+                </label> <br/>
+                
+                <label>
+                  DEF Rating
+                  <input type="text" name="DEFRating" />
+                </label>
+                
+                
+                
+                
+              </form>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -72,8 +114,28 @@ export default function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
+              <form>
+                <label>
+                  Games Played
+                  <input type="text" name="gamesPlayed" />
+                </label> <br/>
+                
+                <label>
+                  VORP 
+                  <input type="text" name="VORP" />
+                </label> <br/>
+                
+                <label>
+                  ATK Rating    
+                  <input type="text" name="ATKRating" />
+                </label> <br/>
+                
+                <label>
+                  DEF Rating
+                  <input type="text" name="DEFRating" />
+                </label>
+
+              </form>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -83,17 +145,11 @@ export default function Home() {
       
       
       
-      
-      
-      
-      
-      
-      
-      
-      
       <div className="split right">
-        <h1> Test </h1>
-        <h1> Test </h1>
+        <h1 className="title">
+          Prediction
+        </h1>
+        
       </div>
         
       </main>
@@ -111,6 +167,8 @@ export default function Home() {
 
       <style jsx>{`
         
+        
+
         .split {
           height: 100%;
           width: 50%;
