@@ -10,33 +10,41 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to Player Prediction Model
+          About Us
         </h1>
 
         <p className="description">
           The most accurate Player Prediction ML Model you can use.
         </p>
 
-        <div className="grid">
-          <a href="/doc" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about our ML model.</p>
-          </a>
 
-          <a href="/aboutUs" className="card">
-            <h3>About Us &rarr;</h3>
-            <p>Learn about the members of this project!</p>
-          </a>
+        <p className="description">
+          Goal of this project: ?????????
+        </p>
+        
+        
+          <div className="card">
+            <h3>William</h3>
+            <p>Hello! My name is William! ...</p>
+          </div>
 
-          <a
-            href="/model" className="card"
-          >
-            <h3>Let's start! &rarr;</h3>
-            <p>Discover and deploy our ML model to predict future NBA superstars.</p>
-          </a>
+          <div className="card">
+            <h3>Kiran</h3>
+            <p>Hello! My name is Kiran! ...</p>
+          </div>
+
+          <div className="card">
+            <h3>Kenny</h3>
+            <p>Hello! My name is Kenny! ...</p>
+          </div>
+          
+          <div className="card">
+            <h3>David</h3>
+            <p>Hello! My name is David! ...</p>
+          </div>
 
 
-        </div>
+        
       </main>
 
       <footer>

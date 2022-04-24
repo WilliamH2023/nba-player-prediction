@@ -1,4 +1,12 @@
 import Head from 'next/head'
+import * as React from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
 
 export default function Home() {
   return (
@@ -9,34 +17,85 @@ export default function Home() {
       </Head>
 
       <main>
+        <div className="split left">
+        
         <h1 className="title">
-          Welcome to Player Prediction Model
+          Create Your Player
         </h1>
 
         <p className="description">
           The most accurate Player Prediction ML Model you can use.
         </p>
 
-        <div className="grid">
-          <a href="/doc" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about our ML model.</p>
-          </a>
-
-          <a href="/aboutUs" className="card">
-            <h3>About Us &rarr;</h3>
-            <p>Learn about the members of this project!</p>
-          </a>
-
-          <a
-            href="/model" className="card"
+        
+        <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+            <Typography>Player Information</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                malesuada lacus ex, sit amet blandit leo lobortis eget.
+              </Typography>
+            </AccordionDetails>
+        </Accordion>
+      
+      
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
           >
-            <h3>Let's start! &rarr;</h3>
-            <p>Discover and deploy our ML model to predict future NBA superstars.</p>
-          </a>
-
-
-        </div>
+            <Typography>Season 1 Stats</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+              malesuada lacus ex, sit amet blandit leo lobortis eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        
+      
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography>Season 2 Stats</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+              malesuada lacus ex, sit amet blandit leo lobortis eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        
+      
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <div className="split right">
+        <h1> Test </h1>
+        <h1> Test </h1>
+      </div>
+        
       </main>
 
       <footer>
@@ -51,6 +110,29 @@ export default function Home() {
       </footer>
 
       <style jsx>{`
+        
+        .split {
+          height: 100%;
+          width: 50%;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          overflow-x: hidden;
+          padding-top: 20px;
+        }
+
+        
+        .left {
+          left: 0;
+          
+        }
+
+        
+        .right {
+          right: 0;
+          
+        }
+        
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
