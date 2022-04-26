@@ -13,8 +13,11 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Chip from "@mui/material/Chip";
+import Scatterplot from "../components/scatterplot";
+
 export default function Home() {
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
@@ -93,12 +96,12 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    ATK Rating
+                    Offensive +/-
                     <input type="text" name="ATKRating" />
                   </label>{" "}
                   <br />
                   <label>
-                    DEF Rating
+                    DEF +/-
                     <input type="text" name="DEFRating" />
                   </label>
                 </form>
@@ -128,12 +131,12 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    ATK Rating
+                    Offensive +/-
                     <input type="text" name="ATKRating" />
                   </label>{" "}
                   <br />
                   <label>
-                    DEF Rating
+                    DEF +/-
                     <input type="text" name="DEFRating" />
                   </label>
                 </form>
@@ -147,29 +150,30 @@ export default function Home() {
 
         <div className="split right">
           <h1 className="title">Our Model Says ...</h1>
-
           {loading && <CircularProgress />}
-          {submitted && <h2> Prediction: Bust</h2>}
+          {submitted && <h2> Prediction: All-Star</h2>}
           {submitted && (
             <>
               <h3> Career Stats </h3>
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="right">Season</TableCell>
-                    <TableCell align="right">Games Played</TableCell>
-                    <TableCell align="right">VORP</TableCell>
-                    <TableCell align="right">ATK Rating</TableCell>
-                    <TableCell align="right">DEF Rating</TableCell>
+                    <TableCell align="right"> Length</TableCell>
+                    <TableCell align="right"> WS/48</TableCell>
+                    <TableCell align="right"> Offensive Box +/-</TableCell>
+                    <TableCell align="right"> Defensive Box +/-</TableCell>
+                    <TableCell align="right"> Overall Box +/- </TableCell>
+                    <TableCell align="right"> VORP </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell align="right">2019-2020</TableCell>
-                    <TableCell align="right">Games Played</TableCell>
-                    <TableCell align="right">VORP</TableCell>
-                    <TableCell align="right">ATK Rating</TableCell>
-                    <TableCell align="right">DEF Rating</TableCell>
+                    <TableCell align="right"> 10 </TableCell>
+                    <TableCell align="right"> 0.2055</TableCell>
+                    <TableCell align="right"> +7.11 </TableCell>
+                    <TableCell align="right"> -0.72</TableCell>
+                    <TableCell align="right"> +6.37 </TableCell>
+                    <TableCell align="right"> 5.11 </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -179,23 +183,68 @@ export default function Home() {
                   <h3> Closest Player Comparison</h3>
                   {/* put image side by side to text about player */}
                   <div className="playercomprow">
+                    <img
+                      src="https://nba-players.herokuapp.com/players/curry/stephen"
+                      alt="DAL"
+                      className="playercompimg"
+                    />
                     <div className="playercompcol">
-                      <img
-                        src="https://nba-players.herokuapp.com/players/curry/stephen"
-                        alt="DAL"
-                        className="playercompimg"
+                      <div className="playercompinfo">Stephen Curry</div>
+                      <div className="playercompinfo">Age: 30</div>
+                      <div className="playercompinfo">Seasons Played: 10</div>
+                      <div className="playercompinfo">VORP: 0.5</div>
+                    </div>
+                  </div>
+                  <div className="honorablementions">
+                    <h3> Honorable Mentions</h3>
+                    <div>
+                      <Chip
+                        color="primary"
+                        clickable={false}
+                        className="player-chip"
+                        label="Kobe Bryant"
+                        variant="outlined"
+                      />
+                      <Chip
+                        color="primary"
+                        clickable={false}
+                        className="player-chip"
+                        label="Michael Jordan"
+                        variant="outlined"
+                      />
+                      <Chip
+                        color="primary"
+                        clickable={false}
+                        className="player-chip"
+                        label="Lebron James"
+                        variant="outlined"
                       />
                     </div>
-                    <div className="playercompcol">
-                      <h4> text </h4>
+                    <div classname="secondcomprow">
+                      <Chip
+                        color="primary"
+                        clickable={false}
+                        className="player-chip"
+                        label="Kevin Durant"
+                        variant="outlined"
+                      />
+                      <Chip
+                        color="primary"
+                        clickable={false}
+                        className="player-chip"
+                        label="Brian Scalabrine"
+                        variant="outlined"
+                      />
                     </div>
                   </div>
                 </div>
-                <div className="col"> hello </div>
+                <div className="col">
+                  {" "}
+                  <Scatterplot />{" "}
+                </div>
               </div>
             </>
           )}
-          {!submitted && <p> you have not submitted yet </p>}
         </div>
       </main>
 
@@ -233,6 +282,11 @@ export default function Home() {
           display: inline;
         }
 
+        .playercomprow {
+          height: 100px;
+          width: 100%;
+        }
+
         .colleft {
           border-right: 1px solid #eaeaea;
         }
@@ -243,8 +297,16 @@ export default function Home() {
           border-right: 1px solid #eaeaea;
           padding-right: 25px;
         }
+        .secondcomprow {
+          margin-top: 10px;
+        }
+
+        .playerChip {
+          padding-margin: 10px;
+        }
 
         .right {
+          margin-left: 20px;
           width: 60%;
           right: 0;
         }
@@ -259,9 +321,15 @@ export default function Home() {
         }
 
         .playercompimg {
+          display: inline;
           width: 100px;
-          height: 100px;
+          height: 100%;
           object-fit: cover;
+          float: left;
+        }
+
+        .playercompinfo {
+          margin-left: 20px;
         }
 
         main {
