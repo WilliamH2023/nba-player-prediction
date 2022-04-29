@@ -60,14 +60,13 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    Age:
-                    <input type="number" name="age" />
-                  </label>{" "}
+                    Draft Pick:
+                    <input type="number" name="draftPick" />
+                  </label>{" "} 
                   <br />
                   <label>
-                    Height:
-                    <input type="text" name="ft" /> ft.
-                    <input type="text" name="in" /> in.
+                    Rookie age: 
+                    <input type="number" name="rookieAge" />
                   </label>
                 </form>
               </Typography>
@@ -86,24 +85,151 @@ export default function Home() {
               <Typography>
                 <form>
                   <label>
-                    Games Played
-                    <input type="text" name="gamesPlayed" />
+                    Guard
+                    <input type="number" name="guard1" />
                   </label>{" "}
                   <br />
+                  <label>
+                    Forward
+                    <input type="number" name="forward1" />
+                  </label>{" "}
+                  <br />
+                  <label>
+                    Center
+                    <input type="number" name="center1" />
+                  </label>{" "}
+                  <br />
+                  <label>
+                    G
+                    <input type="number" name="G1" />
+                  </label>{" "}
+                  <br />
+                  <label>
+                    MP
+                    <input type="number" name="MP1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    PER
+                    <input type="number" name="PER1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    TS
+                    <input type="number" name="TS1" />
+                  </label>
+                  <br />
+
+                  <label>
+                    3PAr
+                    <input type="number" name="3PAr1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    FTr
+                    <input type="number" name="FTr1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    ORB%
+                    <input type="number" name="ORB%1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    DRB%
+                    <input type="number" name="DRB%1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    TRB%
+                    <input type="number" name="TRB%1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    AST%
+                    <input type="number" name="AST%1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    STL%
+                    <input type="number" name="STL%1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    BLK%
+                    <input type="number" name="BLK%1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    TOV%
+                    <input type="number" name="TOV%1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    USG%
+                    <input type="number" name="USG%1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    OWS
+                    <input type="number" name="OWS1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    DWS
+                    <input type="number" name="DWS1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    WS
+                    <input type="number" name="WS1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    WS/48
+                    <input type="number" name="WS/48_1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    OBPM
+                    <input type="number" name="OBPM1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    DBPM
+                    <input type="number" name="DBPM1" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    BPM
+                    <input type="number" name="BPM1" />
+                  </label>{" "}
+                  <br />
+
                   <label>
                     VORP
-                    <input type="text" name="VORP" />
+                    <input type="number" name="VORP1" />
                   </label>{" "}
                   <br />
-                  <label>
-                    Offensive +/-
-                    <input type="text" name="ATKRating" />
-                  </label>{" "}
-                  <br />
-                  <label>
-                    DEF +/-
-                    <input type="text" name="DEFRating" />
-                  </label>
+
                 </form>
               </Typography>
             </AccordionDetails>
@@ -119,26 +245,153 @@ export default function Home() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                <form>
+              <form>
                   <label>
-                    Games Played
-                    <input type="text" name="gamesPlayed" />
+                    Guard
+                    <input type="number" name="guard2" />
                   </label>{" "}
                   <br />
+                  <label>
+                    Forward
+                    <input type="number" name="forward2" />
+                  </label>{" "}
+                  <br />
+                  <label>
+                    Center
+                    <input type="number" name="center2" />
+                  </label>{" "}
+                  <br />
+                  <label>
+                    G
+                    <input type="number" name="G2" />
+                  </label>{" "}
+                  <br />
+                  <label>
+                    MP
+                    <input type="number" name="MP2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    PER
+                    <input type="number" name="PER2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    TS
+                    <input type="number" name="TS2" />
+                  </label>
+                  <br />
+
+                  <label>
+                    3PAr
+                    <input type="number" name="3PAr2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    FTr
+                    <input type="number" name="FTr2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    ORB%
+                    <input type="number" name="ORB%2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    DRB%
+                    <input type="number" name="DRB%2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    TRB%
+                    <input type="number" name="TRB%2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    AST%
+                    <input type="number" name="AST%2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    STL%
+                    <input type="number" name="STL%2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    BLK%
+                    <input type="number" name="BLK%2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    TOV%
+                    <input type="number" name="TOV%2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    USG%
+                    <input type="number" name="USG%2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    OWS
+                    <input type="number" name="OWS2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    DWS
+                    <input type="number" name="DWS2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    WS
+                    <input type="number" name="WS2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    WS/48
+                    <input type="number" name="WS/48_2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    OBPM
+                    <input type="number" name="OBPM2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    DBPM
+                    <input type="number" name="DBPM2" />
+                  </label>{" "}
+                  <br />
+
+                  <label>
+                    BPM
+                    <input type="number" name="BPM2" />
+                  </label>{" "}
+                  <br />
+
                   <label>
                     VORP
-                    <input type="text" name="VORP" />
+                    <input type="number" name="VORP2" />
                   </label>{" "}
                   <br />
-                  <label>
-                    Offensive +/-
-                    <input type="text" name="ATKRating" />
-                  </label>{" "}
-                  <br />
-                  <label>
-                    DEF +/-
-                    <input type="text" name="DEFRating" />
-                  </label>
+
                 </form>
               </Typography>
             </AccordionDetails>
