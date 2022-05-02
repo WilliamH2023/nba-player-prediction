@@ -180,27 +180,27 @@ export default function Home() {
                   </label>
                   <br />
                   <label>
-                    G
+                    Games
                     <input dataIndex={6} onChange={updateInputs} name="G1" />
                   </label>{" "}
                   <br />
                   <label>
-                    MP
+                    Minutes Played
                     <input dataIndex={7} onChange={updateInputs} name="MP1" />
                   </label>{" "}
                   <br />
                   <label>
-                    PER
+                    Player Efficiency Rating
                     <input dataIndex={8} onChange={updateInputs} name="PER1" />
                   </label>{" "}
                   <br />
                   <label>
-                    TS
+                    True Shooting Percentage
                     <input dataIndex={9} onChange={updateInputs} name="TS1" />
                   </label>
                   <br />
                   <label>
-                    3PAr
+                    3-Point Attempt Rate
                     <input
                       dataIndex={10}
                       onChange={updateInputs}
@@ -209,22 +209,22 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    FTr
+                    Free Throw Attempt Rate
                     <input dataIndex={11} onChange={updateInputs} name="FTr1" />
                   </label>{" "}
                   <br />
                   <label>
-                    ORB%
+                    Offensive Rebound Percentage
                     <input dataIndex={12} onChange={updateInputs} name="ORB1" />
                   </label>{" "}
                   <br />
                   <label>
-                    DRB%
+                    Defensive Rebound Percentage
                     <input dataIndex={13} onChange={updateInputs} name="DRB1" />
                   </label>{" "}
                   <br />
                   <label>
-                    TRB%
+                    Total Rebound Percentage
                     <input dataIndex={14} onChange={updateInputs} name="TRB1" />
                   </label>{" "}
                   <br />
@@ -254,22 +254,22 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    OWS
+                    OWS (Offensive Win Shares)
                     <input dataIndex={20} onChange={updateInputs} name="OWS1" />
                   </label>{" "}
                   <br />
                   <label>
-                    DWS
+                    DWS (Defensive Win Shares)
                     <input dataIndex={21} onChange={updateInputs} name="DWS1" />
                   </label>{" "}
                   <br />
                   <label>
-                    WS
+                    WS (Win Shares)
                     <input dataIndex={22} onChange={updateInputs} name="WS1" />
                   </label>{" "}
                   <br />
                   <label>
-                    WS/48
+                    WS/48 (Win Shares per 48 Minutes)
                     <input
                       dataIndex={23}
                       onChange={updateInputs}
@@ -278,7 +278,7 @@ export default function Home() {
                   </label>
                   <br />
                   <label>
-                    OBPM
+                    OBPM (Offensive Box Plus/Minus)
                     <input
                       dataIndex={24}
                       onChange={updateInputs}
@@ -287,7 +287,7 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    DBPM
+                    DBPM (Defensive Box Plus/Minus)
                     <input
                       dataIndex={25}
                       onChange={updateInputs}
@@ -296,12 +296,12 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    BPM
+                    BPM (Box Plus/Minus)
                     <input dataIndex={26} onChange={updateInputs} name="BPM1" />
                   </label>
                   <br />
                   <label>
-                    VORP
+                    VORP (Value over Replacement Player)
                     <input
                       dataIndex={27}
                       onChange={updateInputs}
@@ -340,27 +340,27 @@ export default function Home() {
                   </label>
                   <br />
                   <label>
-                    G
+                    Games
                     <input dataIndex={31} onChange={updateInputs} name="G2" />
                   </label>{" "}
                   <br />
                   <label>
-                    MP
+                    Minutes Played
                     <input dataIndex={32} onChange={updateInputs} name="MP2" />
                   </label>{" "}
                   <br />
                   <label>
-                    PER
+                    Player Efficiency Rating
                     <input dataIndex={33} onChange={updateInputs} name="PER2" />
                   </label>{" "}
                   <br />
                   <label>
-                    TS
+                    True Shooting Percentage
                     <input dataIndex={34} onChange={updateInputs} name="TS2" />
                   </label>
                   <br />
                   <label>
-                    3PAr
+                    3-Point Attempt Rate
                     <input
                       dataIndex={35}
                       onChange={updateInputs}
@@ -369,22 +369,22 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    FTr
+                    Free Throw Attempt Rate
                     <input dataIndex={36} onChange={updateInputs} name="FTr2" />
                   </label>{" "}
                   <br />
                   <label>
-                    ORB%
+                    Offensive Rebound Percentage
                     <input dataIndex={37} onChange={updateInputs} name="ORB2" />
                   </label>{" "}
                   <br />
                   <label>
-                    DRB%
+                    Defensive Rebound Percentage
                     <input dataIndex={38} onChange={updateInputs} name="DRB2" />
                   </label>{" "}
                   <br />
                   <label>
-                    TRB%
+                    Total Rebound Percentage
                     <input dataIndex={39} onChange={updateInputs} name="TRB2" />
                   </label>{" "}
                   <br />
@@ -414,22 +414,22 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    OWS
+                    OWS (Offensive Win Shares)
                     <input dataIndex={45} onChange={updateInputs} name="OWS2" />
                   </label>{" "}
                   <br />
                   <label>
-                    DWS
+                    DWS (Defensive Win Shares)
                     <input dataIndex={46} onChange={updateInputs} name="DWS2" />
                   </label>{" "}
                   <br />
                   <label>
-                    WS
+                    WS (Win Shares)
                     <input dataIndex={47} onChange={updateInputs} name="WS2" />
                   </label>{" "}
                   <br />
                   <label>
-                    WS/48
+                    WS/48 (Win Shares per 48 Minutes)
                     <input
                       dataIndex={48}
                       onChange={updateInputs}
@@ -438,7 +438,7 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    OBPM
+                    OBPM (Offensive Box Plus/Minus)
                     <input
                       dataIndex={49}
                       onChange={updateInputs}
@@ -447,7 +447,7 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    DBPM
+                    DBPM (Defensive Box Plus/Minus)
                     <input
                       dataIndex={50}
                       onChange={updateInputs}
@@ -456,12 +456,12 @@ export default function Home() {
                   </label>{" "}
                   <br />
                   <label>
-                    BPM
+                    BPM (Box Plus/Minus)
                     <input dataIndex={51} onChange={updateInputs} name="BPM2" />
                   </label>{" "}
                   <br />
                   <label>
-                    VORP
+                    VORP (Value over Replacement Player)
                     <input
                       dataIndex={52}
                       onChange={updateInputs}
