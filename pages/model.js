@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -17,15 +17,92 @@ import Chip from "@mui/material/Chip";
 import Scatterplot from "../components/scatterplot";
 
 export default function Home() {
-  const [submitted, setSubmitted] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [playerInfo, setPlayerInfo] = useState(new Array(53));
+  const [dataFetched, setDataFetched] = useState(false);
+  const [data, setData] = useState({});
+  const [featuredPlayer, setFeaturedPlayer] = useState({});
 
   const handleSubmit = () => {
+    if (playerInfo.some((x) => x === undefined || x === NaN)) {
+      alert("Please fill in all fields");
+      return;
+    }
+
     setLoading(true);
     setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
+      /* fetch model data */
+      fetch("http://127.0.0.1:5000/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          playerInfo: playerInfo,
+        }),
+      })
+        .then((response) => response.json())
+        .then(async (data) => {
+          setData(data);
+          setFeaturedPlayer({
+            firstName: data.closest_player[0][0][1].split(" ")[0],
+            lastName: data.closest_player[0][0][1].split(" ")[1],
+            honorableMentions: [
+              data.closest_player[1][0][1],
+              data.closest_player[2][0][1],
+            ],
+            seasonsPlayed: data.closest_player[0][0][2],
+            ws48: data.closest_player[0][0][3],
+            career_obpm: data.closest_player[0][0][4],
+            career_dbpm: data.closest_player[0][0][5],
+            career_bpm: data.closest_player[0][0][6],
+            career_vorp: data.closest_player[0][0][7],
+            drafted: data.closest_player[0][0][8],
+          });
+          setDataFetched(true);
+          setLoading(false);
+        });
     }, 2000);
+  };
+
+  useEffect(() => {
+    /* set intial values for playerInfo */
+    let newPlayerInfo = [...playerInfo];
+    /* undrafted players not allowed */
+    newPlayerInfo[1] = 0;
+    /* set intial values for position */
+    newPlayerInfo[3] = 1;
+    newPlayerInfo[4] = 0;
+    newPlayerInfo[5] = 0;
+    /* set initial values for position season 2 */
+    newPlayerInfo[28] = 1;
+    newPlayerInfo[29] = 0;
+    newPlayerInfo[30] = 0;
+
+    setPlayerInfo(newPlayerInfo);
+  }, []);
+
+  const updateInputs = (e) => {
+    let newPlayerInfo = [...playerInfo];
+    const playerIndex = parseInt(e.target.attributes.dataIndex.value);
+    if (e.target.name === "position1" || e.target.name === "position2") {
+      if (e.target.value === "guard") {
+        newPlayerInfo[playerIndex] = 1;
+        newPlayerInfo[playerIndex + 1] = 0;
+        newPlayerInfo[playerIndex + 2] = 0;
+      } else if (e.target.value === "forward") {
+        newPlayerInfo[playerIndex] = 0;
+        newPlayerInfo[playerIndex + 1] = 1;
+        newPlayerInfo[playerIndex + 2] = 0;
+      } else if (e.target.value === "center") {
+        newPlayerInfo[playerIndex] = 0;
+        newPlayerInfo[playerIndex + 1] = 0;
+        newPlayerInfo[playerIndex + 2] = 1;
+      }
+    } else {
+      newPlayerInfo[playerIndex] = parseFloat(e.target.value);
+    }
+    setPlayerInfo(newPlayerInfo);
   };
 
   return (
@@ -53,22 +130,26 @@ export default function Home() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                <form>
-                  <label>
-                    Name:
-                    <input type="text" name="name" />
-                  </label>{" "}
+                <div>
                   <br />
                   <label>
-                    Draft Pick:
-                    <input type="number" name="draftPick" />
-                  </label>{" "} 
-                  <br />
-                  <label>
-                    Rookie age: 
-                    <input type="number" name="rookieAge" />
+                    Draft Pick (1-60):
+                    <input
+                      name="draftPick"
+                      dataIndex={0}
+                      onChange={updateInputs}
+                    />
                   </label>
-                </form>
+                  <br />
+                  <label>
+                    Rookie age:
+                    <input
+                      name="rookieAge"
+                      dataIndex={2}
+                      onChange={updateInputs}
+                    />
+                  </label>
+                </div>
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -83,154 +164,152 @@ export default function Home() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                <form>
+                <div>
                   <label>
-                    Guard
-                    <input type="number" name="guard1" />
-                  </label>{" "}
-                  <br />
-                  <label>
-                    Forward
-                    <input type="number" name="forward1" />
-                  </label>{" "}
-                  <br />
-                  <label>
-                    Center
-                    <input type="number" name="center1" />
-                  </label>{" "}
+                    Position
+                    <select
+                      onChange={updateInputs}
+                      name="position1"
+                      dataIndex={3}
+                      id="position1"
+                    >
+                      <option value="guard">Guard</option>
+                      <option value="forward">Forward</option>
+                      <option value="center">Center</option>
+                    </select>
+                  </label>
                   <br />
                   <label>
                     G
-                    <input type="number" name="G1" />
+                    <input dataIndex={6} onChange={updateInputs} name="G1" />
                   </label>{" "}
                   <br />
                   <label>
                     MP
-                    <input type="number" name="MP1" />
+                    <input dataIndex={7} onChange={updateInputs} name="MP1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     PER
-                    <input type="number" name="PER1" />
+                    <input dataIndex={8} onChange={updateInputs} name="PER1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     TS
-                    <input type="number" name="TS1" />
+                    <input dataIndex={9} onChange={updateInputs} name="TS1" />
                   </label>
                   <br />
-
                   <label>
                     3PAr
-                    <input type="number" name="3PAr1" />
+                    <input
+                      dataIndex={10}
+                      onChange={updateInputs}
+                      name="ThreePAr1"
+                    />
                   </label>{" "}
                   <br />
-
                   <label>
                     FTr
-                    <input type="number" name="FTr1" />
+                    <input dataIndex={11} onChange={updateInputs} name="FTr1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     ORB%
-                    <input type="number" name="ORB%1" />
+                    <input dataIndex={12} onChange={updateInputs} name="ORB1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     DRB%
-                    <input type="number" name="DRB%1" />
+                    <input dataIndex={13} onChange={updateInputs} name="DRB1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     TRB%
-                    <input type="number" name="TRB%1" />
+                    <input dataIndex={14} onChange={updateInputs} name="TRB1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     AST%
-                    <input type="number" name="AST%1" />
+                    <input dataIndex={15} onChange={updateInputs} name="AST1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     STL%
-                    <input type="number" name="STL%1" />
+                    <input dataIndex={16} onChange={updateInputs} name="STL1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     BLK%
-                    <input type="number" name="BLK%1" />
+                    <input dataIndex={17} onChange={updateInputs} name="BLK1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     TOV%
-                    <input type="number" name="TOV%1" />
+                    <input dataIndex={18} onChange={updateInputs} name="TOV1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     USG%
-                    <input type="number" name="USG%1" />
+                    <input dataIndex={19} onChange={updateInputs} name="USG1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     OWS
-                    <input type="number" name="OWS1" />
+                    <input dataIndex={20} onChange={updateInputs} name="OWS1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     DWS
-                    <input type="number" name="DWS1" />
+                    <input dataIndex={21} onChange={updateInputs} name="DWS1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     WS
-                    <input type="number" name="WS1" />
+                    <input dataIndex={22} onChange={updateInputs} name="WS1" />
                   </label>{" "}
                   <br />
-
                   <label>
                     WS/48
-                    <input type="number" name="WS/48_1" />
-                  </label>{" "}
+                    <input
+                      dataIndex={23}
+                      onChange={updateInputs}
+                      name="WS481"
+                    />
+                  </label>
                   <br />
-
                   <label>
                     OBPM
-                    <input type="number" name="OBPM1" />
+                    <input
+                      dataIndex={24}
+                      onChange={updateInputs}
+                      name="OBPM1"
+                    />
                   </label>{" "}
                   <br />
-
                   <label>
                     DBPM
-                    <input type="number" name="DBPM1" />
+                    <input
+                      dataIndex={25}
+                      onChange={updateInputs}
+                      name="DBPM1"
+                    />
                   </label>{" "}
                   <br />
-
                   <label>
                     BPM
-                    <input type="number" name="BPM1" />
-                  </label>{" "}
+                    <input dataIndex={26} onChange={updateInputs} name="BPM1" />
+                  </label>
                   <br />
-
                   <label>
                     VORP
-                    <input type="number" name="VORP1" />
-                  </label>{" "}
+                    <input
+                      dataIndex={27}
+                      onChange={updateInputs}
+                      name="VORP1"
+                    />
+                  </label>
                   <br />
-
-                </form>
+                </div>
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -245,154 +324,152 @@ export default function Home() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-              <form>
+                <div>
                   <label>
-                    Guard
-                    <input type="number" name="guard2" />
-                  </label>{" "}
-                  <br />
-                  <label>
-                    Forward
-                    <input type="number" name="forward2" />
-                  </label>{" "}
-                  <br />
-                  <label>
-                    Center
-                    <input type="number" name="center2" />
-                  </label>{" "}
+                    Position
+                    <select
+                      onChange={updateInputs}
+                      name="position2"
+                      id="position2"
+                      dataIndex={28}
+                    >
+                      <option value="guard">Guard</option>
+                      <option value="forward">Forward</option>
+                      <option value="center">Center</option>
+                    </select>
+                  </label>
                   <br />
                   <label>
                     G
-                    <input type="number" name="G2" />
+                    <input dataIndex={31} onChange={updateInputs} name="G2" />
                   </label>{" "}
                   <br />
                   <label>
                     MP
-                    <input type="number" name="MP2" />
+                    <input dataIndex={32} onChange={updateInputs} name="MP2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     PER
-                    <input type="number" name="PER2" />
+                    <input dataIndex={33} onChange={updateInputs} name="PER2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     TS
-                    <input type="number" name="TS2" />
+                    <input dataIndex={34} onChange={updateInputs} name="TS2" />
                   </label>
                   <br />
-
                   <label>
                     3PAr
-                    <input type="number" name="3PAr2" />
+                    <input
+                      dataIndex={35}
+                      onChange={updateInputs}
+                      name="ThreePAr2"
+                    />
                   </label>{" "}
                   <br />
-
                   <label>
                     FTr
-                    <input type="number" name="FTr2" />
+                    <input dataIndex={36} onChange={updateInputs} name="FTr2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     ORB%
-                    <input type="number" name="ORB%2" />
+                    <input dataIndex={37} onChange={updateInputs} name="ORB2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     DRB%
-                    <input type="number" name="DRB%2" />
+                    <input dataIndex={38} onChange={updateInputs} name="DRB2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     TRB%
-                    <input type="number" name="TRB%2" />
+                    <input dataIndex={39} onChange={updateInputs} name="TRB2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     AST%
-                    <input type="number" name="AST%2" />
+                    <input dataIndex={40} onChange={updateInputs} name="AST2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     STL%
-                    <input type="number" name="STL%2" />
+                    <input dataIndex={41} onChange={updateInputs} name="STL2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     BLK%
-                    <input type="number" name="BLK%2" />
+                    <input dataIndex={42} onChange={updateInputs} name="BLK2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     TOV%
-                    <input type="number" name="TOV%2" />
+                    <input dataIndex={43} onChange={updateInputs} name="TOV2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     USG%
-                    <input type="number" name="USG%2" />
+                    <input dataIndex={44} onChange={updateInputs} name="USG2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     OWS
-                    <input type="number" name="OWS2" />
+                    <input dataIndex={45} onChange={updateInputs} name="OWS2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     DWS
-                    <input type="number" name="DWS2" />
+                    <input dataIndex={46} onChange={updateInputs} name="DWS2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     WS
-                    <input type="number" name="WS2" />
+                    <input dataIndex={47} onChange={updateInputs} name="WS2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     WS/48
-                    <input type="number" name="WS/48_2" />
+                    <input
+                      dataIndex={48}
+                      onChange={updateInputs}
+                      name="WS482"
+                    />
                   </label>{" "}
                   <br />
-
                   <label>
                     OBPM
-                    <input type="number" name="OBPM2" />
+                    <input
+                      dataIndex={49}
+                      onChange={updateInputs}
+                      name="OBPM2"
+                    />
                   </label>{" "}
                   <br />
-
                   <label>
                     DBPM
-                    <input type="number" name="DBPM2" />
+                    <input
+                      dataIndex={50}
+                      onChange={updateInputs}
+                      name="DBPM2"
+                    />
                   </label>{" "}
                   <br />
-
                   <label>
                     BPM
-                    <input type="number" name="BPM2" />
+                    <input dataIndex={51} onChange={updateInputs} name="BPM2" />
                   </label>{" "}
                   <br />
-
                   <label>
                     VORP
-                    <input type="number" name="VORP2" />
-                  </label>{" "}
+                    <input
+                      dataIndex={52}
+                      onChange={updateInputs}
+                      name="VORP2"
+                    />
+                  </label>
                   <br />
-
-                </form>
+                </div>
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -404,15 +481,19 @@ export default function Home() {
         <div className="split right">
           <h1 className="title">Our Model Says ...</h1>
           {loading && <CircularProgress />}
-          {submitted && <h2> Prediction: All-Star</h2>}
-          {submitted && (
+          {dataFetched && (
+            <h2>
+              Prediction: {data.classification === 0 ? "Bust" : "Not Bust"}{" "}
+            </h2>
+          )}
+          {dataFetched && (
             <>
               <h3> Career Stats </h3>
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="right"> Length</TableCell>
-                    <TableCell align="right"> WS/48</TableCell>
+                    <TableCell align="right">Career Length</TableCell>
+                    <TableCell align="right">Career WS/48</TableCell>
                     <TableCell align="right"> Offensive Box +/-</TableCell>
                     <TableCell align="right"> Defensive Box +/-</TableCell>
                     <TableCell align="right"> Overall Box +/- </TableCell>
@@ -421,12 +502,26 @@ export default function Home() {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell align="right"> 10 </TableCell>
-                    <TableCell align="right"> 0.2055</TableCell>
-                    <TableCell align="right"> +7.11 </TableCell>
-                    <TableCell align="right"> -0.72</TableCell>
-                    <TableCell align="right"> +6.37 </TableCell>
-                    <TableCell align="right"> 5.11 </TableCell>
+                    <TableCell align="right">
+                      {data.career_length[0].toFixed(2) <= 1
+                        ? `< 1 year`
+                        : `${data.career_length[0].toFixed(2)} yrs`}
+                    </TableCell>
+                    <TableCell align="right">
+                      {data.career_ws48[0].toFixed(2)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {data.career_obpm[0].toFixed(2)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {data.dbpm[0].toFixed(2)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {data.bpm[0].toFixed(2)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {data.career_vorp[0].toFixed(2)}
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -437,15 +532,52 @@ export default function Home() {
                   {/* put image side by side to text about player */}
                   <div className="playercomprow">
                     <img
-                      src="https://nba-players.herokuapp.com/players/curry/stephen"
+                      src={`https://nba-players.herokuapp.com/players/${featuredPlayer.lastName}/${featuredPlayer.firstName}`}
                       alt="DAL"
                       className="playercompimg"
                     />
                     <div className="playercompcol">
-                      <div className="playercompinfo">Stephen Curry</div>
-                      <div className="playercompinfo">Age: 30</div>
-                      <div className="playercompinfo">Seasons Played: 10</div>
-                      <div className="playercompinfo">VORP: 0.5</div>
+                      <div className="playercompinfo">
+                        {dataFetched &&
+                          featuredPlayer.firstName +
+                            " " +
+                            featuredPlayer.lastName}
+                      </div>
+                      <div className="playercompinfo">
+                        Seasons Played:{" "}
+                        {dataFetched && parseInt(featuredPlayer.seasonsPlayed)}
+                      </div>
+                      <div className="playercompinfo">
+                        Career WS/48:{" "}
+                        {dataFetched &&
+                          parseFloat(featuredPlayer.ws48).toFixed(2)}
+                      </div>
+                      <div className="playercompinfo">
+                        Career Offensive +/-:{" "}
+                        {dataFetched &&
+                          parseFloat(featuredPlayer.career_obpm).toFixed(2)}
+                      </div>
+                      <div className="playercompinfo">
+                        Career Offensive +/-:{" "}
+                        {dataFetched &&
+                          parseFloat(featuredPlayer.career_dbpm).toFixed(2)}
+                      </div>
+                      <div className="playercompinfo">
+                        Career Overall +/-:{" "}
+                        {dataFetched &&
+                          parseFloat(featuredPlayer.career_bpm).toFixed(2)}
+                      </div>
+                      <div className="playercompinfo">
+                        Career VORP:{" "}
+                        {dataFetched &&
+                          parseFloat(featuredPlayer.career_vorp).toFixed(
+                            2
+                          )}{" "}
+                      </div>
+                      <div className="playercompinfo">
+                        Draft Pick:{" "}
+                        {dataFetched && parseInt(featuredPlayer.drafted)}
+                      </div>
                     </div>
                   </div>
                   <div className="honorablementions">
@@ -455,37 +587,22 @@ export default function Home() {
                         color="primary"
                         clickable={false}
                         className="player-chip"
-                        label="Kobe Bryant"
+                        label={
+                          dataFetched
+                            ? featuredPlayer.honorableMentions[0]
+                            : "Loading.."
+                        }
                         variant="outlined"
                       />
                       <Chip
                         color="primary"
                         clickable={false}
                         className="player-chip"
-                        label="Michael Jordan"
-                        variant="outlined"
-                      />
-                      <Chip
-                        color="primary"
-                        clickable={false}
-                        className="player-chip"
-                        label="Lebron James"
-                        variant="outlined"
-                      />
-                    </div>
-                    <div classname="secondcomprow">
-                      <Chip
-                        color="primary"
-                        clickable={false}
-                        className="player-chip"
-                        label="Kevin Durant"
-                        variant="outlined"
-                      />
-                      <Chip
-                        color="primary"
-                        clickable={false}
-                        className="player-chip"
-                        label="Brian Scalabrine"
+                        label={
+                          dataFetched
+                            ? featuredPlayer.honorableMentions[1]
+                            : "Loading.."
+                        }
                         variant="outlined"
                       />
                     </div>
@@ -562,6 +679,10 @@ export default function Home() {
           margin-left: 20px;
           width: 60%;
           right: 0;
+        }
+
+        .honorablementions {
+          padding-top: 35px;
         }
 
         .container {
