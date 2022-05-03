@@ -17,26 +17,66 @@ export default function Home() {
           The most accurate Player Prediction ML Model you can use.
         </p>
 
-        <div className="grid">
-          <a href="/doc" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about our ML model.</p>
-          </a>
 
-          <a href="/aboutUs" className="card">
-            <h3>About Us &rarr;</h3>
-            <p>Learn about the members of this project!</p>
-          </a>
+        <div className="section">
+          Data Collection
+        </div>
 
-          <a
-            href="/model" className="card"
-          >
-            <h3>Let's start! &rarr;</h3>
-            <p>Discover and deploy our ML model to predict future NBA superstars.</p>
-          </a>
+        <div className="doc">
+          Most of the data used in our model was acquired from a dataset that 
+          was originally scraped from basketball-reference.com then given to us 
+          for use in a previous project.  Additionally, we scraped other 
+          attributes like ‘draft pick’ and ‘rookie age’ from the site ourselves 
+          and added them to the dataset.  There were also some elements that were
+          added manually, such as missing player IDs.  Once all the data was 
+          collected where each row represented a player’s performance for a 
+          given year, we then reformatted the data such that each row represented 
+          a player’s entire career, with information on career length, first two 
+          seasons stats, and career totals.
+        </div>
 
+
+        <div className="section">
+          Data Preprocessing
+        </div>
+
+
+        <div className="doc">
+          To account for missing draft pick data for players who went undrafted,
+          we used the K-nearest-neighbors imputer from sklearn to input missing 
+          draft pick data. We did this instead of eliminating those data points 
+          because players go undrafted for a reason, not at random. 
+        </div>
+	
+        <div className="section">
+          Regression Models
+        </div>
+
+        <div className="doc">
+          In order to predict player statistics, we both varied hyperparameters 
+          using grid search and tested various regression models.
+        </div>
+
+        <div className="doc">
+          <ol>
+            <li> 
+              <div>Models Tested</div>
+              <div>We experimented using sklearn’s Linear Regression, Ridge &
+                  Lasso Regression, and the linear support vector machine 
+                  regression. Using root mean squared error as our testing 
+                  metric, we found that either ridge regression or the SVM 
+                  were the most accurate depending on the statistic being 
+                  predicted.</div>
+            </li>
+
+            <li>
+              
+            </li>
+          </ol>
 
         </div>
+
+
       </main>
 
       <footer>
@@ -137,6 +177,25 @@ export default function Home() {
 
           max-width: 800px;
           margin-top: 3rem;
+        }
+
+        .section {
+          display: flex;
+          align-items: left;
+          padding: 0.75rem;
+          margin-top: 1rem;
+          font-weight: bold;
+          font-size: 1.2rem;
+        }
+
+
+        .doc {
+          display: flex;
+          align-items: left;
+          padding: 0.75rem;
+          max-width: 800px;
+          font-size: 1.1rem;
+          font-family: Arial;
         }
 
         .card {
