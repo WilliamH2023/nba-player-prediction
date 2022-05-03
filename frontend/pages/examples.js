@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -12,11 +13,35 @@ export default function Home() {
         <h1 className="title">Examples</h1>
 
         <p className="description">
-          Looking through 3 examples of our program in action.
+          Looking through 2 examples of our program in action.
         </p>
-        <h3 style={{ float: "left" }}>
-          Example 1: The mysterious story of Ben Simmons
-        </h3>
+        <div>
+          <h3>Example 1: Using Ben Simmons 1st 2 Seasons As Input</h3>
+          <Image height={350} width={700} src="/../public/simmons.png" />
+          <div>
+            Hey, our model works. Given Simmons data, we are able to get a
+            projection of Simmons career and some career stats. Our model
+            couldn't account for a sore back injury that lasted 2 years, but it
+            does pretty well to know that Ben Simmons is the closest comparison
+            and gives an accurate comparison against other NBA players.
+          </div>
+        </div>
+
+        <div>
+          <h3>Example 2: Looking at the past with Wade's 1st 2 Seasons</h3>
+          <Image height={350} width={700} src="/../public/wade.png" />
+          <div>
+            With Dwyane Wade, our model still fares pretty well. We're able to
+            say that Dwayne Wade is the closest current player (as of 2018) and
+            his predicted stats don't line up that far away from the stats that
+            he achieves in his career, although our predictions are not exact.
+            Furthermore, the honorable mentions of Chris Paul and Vince Carter
+            aren't bad, as they are also guards who have had long and successful
+            careers in the NBA. Against the scatterplot renders in a way where
+            users can compare their potential player against the rest of the
+            league.
+          </div>
+        </div>
       </main>
 
       <footer>
