@@ -32,7 +32,7 @@ export default function Home() {
     setLoading(true);
     setTimeout(() => {
       /* fetch model data */
-      fetch("http://127.0.0.1:5000/api", {
+      fetch("https://nba-predictor-backend.herokuapp.com/api", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
