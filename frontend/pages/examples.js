@@ -17,7 +17,11 @@ export default function Home() {
         </p>
         <div>
           <h3>Example 1: Using Ben Simmons 1st 2 Seasons As Input</h3>
-          <Image height={350} width={700} src="/../public/simmons.png" />
+          <Image
+            height={350}
+            width={700}
+            src="https://user-images.githubusercontent.com/59927955/166409429-bb9c8f84-fd9a-410d-b97a-d53f8b87b038.png"
+          />
           <div>
             Hey, our model works. Given Simmons data, we are able to get a
             projection of Simmons career and some career stats. Our model
@@ -29,7 +33,11 @@ export default function Home() {
 
         <div>
           <h3>Example 2: Looking at the past with Wade's 1st 2 Seasons</h3>
-          <Image height={350} width={700} src="/../public/wade.png" />
+          <Image
+            height={350}
+            width={700}
+            src="https://user-images.githubusercontent.com/59927955/166409431-d0055329-0743-4aa0-805c-46f255f21303.png"
+          />
           <div>
             With Dwyane Wade, our model still fares pretty well. We're able to
             say that Dwayne Wade is the closest current player (as of 2018) and
