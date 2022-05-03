@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from "next/head";
 
 export default function Home() {
   return (
@@ -7,44 +7,16 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-  
+
       <main>
-        <h1 className="title">
-          About Us
-        </h1>
+        <h1 className="title">Examples</h1>
 
         <p className="description">
-          The most accurate Player Prediction ML Model you can use.
+          Looking through 3 examples of our program in action.
         </p>
-
-
-        <p className="description">
-          Goal of this project: ?????????
-        </p>
-        
-        
-          <div className="card">
-            <h3>William</h3>
-            <p>Hello! My name is William! ...</p>
-          </div>
-
-          <div className="card">
-            <h3>Kiran</h3>
-            <p>Hello! My name is Kiran! ...</p>
-          </div>
-
-          <div className="card">
-            <h3>Kenny</h3>
-            <p>Hello! My name is Kenny! ...</p>
-          </div>
-          
-          <div className="card">
-            <h3>David</h3>
-            <p>Hello! My name is David! ...</p>
-          </div>
-
-
-        
+        <h3 style={{ float: "left" }}>
+          Example 1: The mysterious story of Ben Simmons
+        </h3>
       </main>
 
       <footer>
@@ -53,8 +25,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/mmonro02.png" alt="mmonro" className="logo" />
+          Powered by <img src="/mmonro02.png" alt="mmonro" className="logo" />
         </a>
       </footer>
 
@@ -64,8 +35,8 @@ export default function Home() {
           padding: 0 0.5rem;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          justify-content: flex-start;
+          align-items: flex-start;
         }
 
         main {
@@ -116,11 +87,6 @@ export default function Home() {
           margin: 0;
           line-height: 1.15;
           font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
         }
 
         .description {
@@ -204,5 +170,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }

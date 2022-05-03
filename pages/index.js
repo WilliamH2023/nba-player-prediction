@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from "next/head";
 
 export default function Home() {
   return (
@@ -9,9 +9,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title">
-          Welcome to Player Prediction Model
-        </h1>
+        <h1 className="title">Welcome to Player Prediction Model</h1>
 
         <p className="description">
           The most accurate Player Prediction ML Model you can use.
@@ -23,19 +21,17 @@ export default function Home() {
             <p>Find in-depth information about our ML model.</p>
           </a>
 
-          <a href="/aboutUs" className="card">
-            <h3>About Us &rarr;</h3>
-            <p>Learn about the members of this project!</p>
+          <a href="/examples" className="card">
+            <h3>Examples &rarr;</h3>
+            <p>See a couple of examples of our project in action.</p>
           </a>
 
-          <a
-            href="/model" className="card"
-          >
+          <a href="/model" className="card">
             <h3>Let's start! &rarr;</h3>
-            <p>Discover and deploy our ML model to predict future NBA superstars.</p>
+            <p>
+              Discover and deploy our ML model to predict future NBA superstars.
+            </p>
           </a>
-
-
         </div>
       </main>
 
@@ -45,8 +41,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/mmonro02.png" alt="mmonro" className="logo" />
+          Powered by <img src="/mmonro02.png" alt="mmonro" className="logo" />
         </a>
       </footer>
 
@@ -196,5 +191,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }

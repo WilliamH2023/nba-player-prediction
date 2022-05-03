@@ -26,7 +26,6 @@ def predict():
     # Get the data from the POST request.
     data = request.get_json(force=True)
     values = data['playerInfo']
-    # Get the data from the POST request.
     # Make prediction using model loaded from disk as per the data.
     bpm = bpm_model.predict(np.array(values).reshape(1,-1)).tolist()
     dbpm = dbpm_model.predict(np.array(values).reshape(1,-1)).tolist()

@@ -610,7 +610,13 @@ export default function Home() {
                 </div>
                 <div className="col">
                   {" "}
-                  <Scatterplot />{" "}
+                  {dataFetched && (
+                    <Scatterplot
+                      careerLength={data.career_length[0].toFixed(2)}
+                      OBPM={data.career_obpm[0].toFixed(2)}
+                      DBPM={data.dbpm[0].toFixed(2)}
+                    />
+                  )}
                 </div>
               </div>
             </>
